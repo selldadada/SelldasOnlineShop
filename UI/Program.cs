@@ -1,7 +1,6 @@
 ﻿using OnlineShopBusinessServices;
 using OnlineShopDataServices;
 using OnlineShopModel;
-using System;
 using System.Collections.Generic;
 using System;
 
@@ -20,50 +19,6 @@ namespace OnlineShopUI
             CustomerServices customerServices = new CustomerServices();
             bool result = customerServices.VerifyCustomer(username);
 
-            List<product> products = new List<product>();
-
-            product croptop = new product();
-            croptop.name = "Crew Neck Semi Crop Top";
-            croptop.variation = "Black | White | Brown";
-            croptop.size = "XS | S | M | L | XL";
-            croptop.price = "P149.00";
-
-            product fulllength = new product();
-            fulllength.name = "Crew Neck Full Length Top";
-            fulllength.variation = "Black | White | Grey";
-            fulllength.size = "XS | S | M | L | XL";
-            fulllength.price = "P170.00";
-
-            product jeans = new product();
-            jeans.name = "Baggy Jeans High Waist";
-            jeans.variation = "Dark Blue | Blue | Light Blue";
-            jeans.size = "S | M | L";
-            jeans.price = "P260.00";
-
-            product trouser = new product();
-            trouser.name = "Wide Leg Trouser High Waist";
-            trouser.variation = "Brown | Khaki | White";
-            trouser.size = " S | M | L";
-            trouser.price = "P230.00";
-
-            product leather = new product();
-            leather.name = "Leather Shoulder Bag";
-            leather.variation = "White | Black | Brown"; ;
-            leather.price = "P200.00";
-
-            product corduroy = new product();
-            corduroy.name = "Corduroy Sling Bag";
-            corduroy.variation = "Brown | Khaki | White";
-            corduroy.price = "P170.00";
-
-
-            products.Add(croptop);
-            products.Add(fulllength);
-            products.Add(jeans);
-            products.Add(trouser);
-            products.Add(leather);
-            products.Add(corduroy);
-
             if (result)
             {
                 Console.WriteLine("");
@@ -71,71 +26,41 @@ namespace OnlineShopUI
                 Console.WriteLine("┌──────────────────────────────┐");
                 Console.WriteLine("Welcome to Sellda's Tiktok Shop!");
                 Console.WriteLine("└──────────────────────────────┘");
-                Console.WriteLine("\r\nWhat are you looking for? Please select from the Categories:");
+                Console.WriteLine("\r\nWhat are you looking for? Please select a Number:");
                 Console.WriteLine("");
-                Console.WriteLine("  TOPS");
-                Console.WriteLine("  BOTTOMS");
-                Console.WriteLine("  BAGS");
+                Console.WriteLine("  1 Crew Neck Semi Crop Top");
+                Console.WriteLine("  2 Crew Neck Full Length Top");
+                Console.WriteLine("  3 Baggy Jeans High Waist");
+                Console.WriteLine("  4 Wide Leg Trouser High Waist");
+                Console.WriteLine("  5 Leather Shoulder Bag");
+                Console.WriteLine("  6 Corduroy Sling Bag");
                 Console.WriteLine("");
 
                 string num = Console.ReadLine();
 
-                switch (num)
+                ProductList productList = new ProductList();
+
+                int productIndex = int.Parse(num) - 1;
+
+                if (productIndex >= 0 && productIndex < productList.products.Count)
                 {
-                    case "TOPS":
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + croptop.name);
-                        Console.WriteLine("Variations: " + croptop.variation);
-                        Console.WriteLine("Sizes: " + croptop.size);
-                        Console.WriteLine("Price: " + croptop.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
+                    product product = productList.products[productIndex];
 
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + fulllength.name);
-                        Console.WriteLine("Variations: " + fulllength.variation);
-                        Console.WriteLine("Sizes: " + fulllength.size);
-                        Console.WriteLine("Price: " + fulllength.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
-                        break;
-
-                    case "BOTTOMS":
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + jeans.name);
-                        Console.WriteLine("Variations: " + jeans.variation);
-                        Console.WriteLine("Sizes: " + jeans.size);
-                        Console.WriteLine("Price: " + jeans.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
-
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + trouser.name);
-                        Console.WriteLine("Variations: " + trouser.variation);
-                        Console.WriteLine("Sizes: " + trouser.size);
-                        Console.WriteLine("Price: " + trouser.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
-                        break;
-
-                    case "BAGS":
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + leather.name);
-                        Console.WriteLine("Variations: " + leather.variation);
-                        Console.WriteLine("Sizes: " + leather.size);
-                        Console.WriteLine("Price: " + leather.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
-
-                        Console.WriteLine("");
-                        Console.WriteLine("╒══════════════════════════════╕");
-                        Console.WriteLine("Product: " + corduroy.name);
-                        Console.WriteLine("Variations: " + corduroy.variation);
-                        Console.WriteLine("Sizes: " + corduroy.size);
-                        Console.WriteLine("Price: " + corduroy.price);
-                        Console.WriteLine("╘══════════════════════════════╛");
-                        break;
+                    Console.WriteLine("");
+                    Console.WriteLine("╒══════════════════════════════════╕");
+                    Console.WriteLine($"Product: {product.name}");
+                    Console.WriteLine($"Variations: {product.variation}");
+                    Console.WriteLine($"Sizes: {product.size}");
+                    Console.WriteLine($"Price: {product.price}");
+                    Console.WriteLine("╘══════════════════════════════════╛");
                 }
+
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Invalid Number Selected");
+                }
+
                 return;
             }
             else
